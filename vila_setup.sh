@@ -12,7 +12,7 @@ else
 fi
 
 # This is required to enable PEP 660 support
-python -m pip install --upgrade pip
+python -m pip install --upgrade pip setuptools
 
 # This is optional if you prefer to use built-in nvcc
 # conda install -c nvidia cuda-toolkit -y

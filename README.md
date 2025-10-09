@@ -20,7 +20,7 @@ questions like "How long were you in the building for?"
     ```
     mkdir deps
     cd deps
-    git clone https://github.com/NVlabs/VILA.git
+    git clone --branch LongVILA https://github.com/NVlabs/VILA.git
     ./vila_setup.sh remembr
     ```
 
