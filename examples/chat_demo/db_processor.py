@@ -65,9 +65,9 @@ def create_and_launch_memory_builder(args=None, **kwargs):
 class ROSMemoryBuilder(Node):
 
     def __init__(self, args, segment_time=3, \
-                image_topic='/front_stereo_camera/left/image_raw', \
+                image_topic='/camera/color/image_raw', \
                 collection_name="test", db_ip="127.0.0.1", \
-                pos_topic='/amcl_pose', queue_size=1000):
+                pos_topic='/Odometry', queue_size=1000):
         
         super().__init__('minimal_subscriber')
 
@@ -98,7 +98,7 @@ class ROSMemoryBuilder(Node):
                 self.img_listener_callback,
                 10)
 
-        if 'odom' in pos_topic:
+        if 'Odom' in pos_topic:
             self.pose_sub = self.create_subscription(
                 Odometry,
                 pos_topic,
@@ -123,7 +123,7 @@ class ROSMemoryBuilder(Node):
 
     def pose_listener_callback(self, odom_msg):
         # self.get_logger().info('I heard: "%s"' % msg.data)
-        print("Got a synchronized message")
+        # print("Got a synchronized message")
         # we can also only accept every third message
         position = np.array([odom_msg.pose.pose.position.x, odom_msg.pose.pose.position.y, odom_msg.pose.pose.position.z])
         quat = np.array([odom_msg.pose.pose.orientation.x, odom_msg.pose.pose.orientation.y, odom_msg.pose.pose.orientation.z,odom_msg.pose.pose.orientation.w])
@@ -224,6 +224,7 @@ def main(args=None):
     print("Starting")
 
     args = memory_builder_args(args)
+    rclpy.init(args=None)
 
     mem_builder = ROSMemoryBuilder(args)
 
