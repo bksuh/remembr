@@ -1,14 +1,14 @@
 import json
 import numpy as np
 
-from langchain_community.chat_models import ChatOllama
+from langchain_community.chat_models import ChatOllama # ChatOllama를 불러오기 위한 것
 
 from langchain_core.prompts import PromptTemplate
 from time import strftime, localtime
-import numpy as np
-import tqdm
+import numpy as np # 넘파이
+import tqdm # 진행률
 
-import re
+import re 
 import time
 import uuid
 import sys
@@ -33,7 +33,7 @@ from memory.milvus_memory import MilvusMemory
 from memory.text_memory import TextMemory
 from memory.video_memory import VideoMemory, ImageMemoryItem
 
-from tools.tools import format_docs
+from tools.tools import format_docs # documents를 우리가 원하는 구조로 변형
 
 
 def parse_json(string):
@@ -109,7 +109,23 @@ def evaluate_output(qa_instance, predicted):
 
 
 def answer_squad_question(model, question, qa_instance):
+    """
+    주어진 QA instance에 대해 모델의 응답을 생성하고 평가하는 함수.
+    SQuAD-style QA 파이프라인에서 단일 질문 단위로 동작한다.
 
+    Args:
+        model: 질의(query) 인터페이스를 가진 LLM 객체 (예: ReMEmbRAgent)
+        question (str): 질의 문장 (자연어 질문)
+        qa_instance (dict): 현재 평가 중인 QA 샘플 (정답/문맥 포함)
+
+    Returns:
+        dict: {
+            'response': 모델의 원본 출력 (dict 형태),
+            'error': 평가 점수 또는 에러 플래그,
+            'elapsed': 모델 응답 시간 (초 단위),
+            ...추가적으로 parsed 응답의 key들이 병합됨
+        }
+    """
     print(f'Question: {question}')
 
     parsed = None
@@ -125,7 +141,7 @@ def answer_squad_question(model, question, qa_instance):
             parsed = asdict(response)
 
             out_error = evaluate_output(qa_instance, parsed)
-            print("Time elapsed", elapsed)
+            print("It took", elapsed, "seconds to answer the question.")
 
         except Exception as e:
             print(parsed)
@@ -158,27 +174,27 @@ def load_memory(args, qa_instance, use_milvus=True, use_optimal_context=False, i
     memory.reset()
 
 
-    captions_path = os.path.join(args.data_dir, 'captions', str(args.sequence_id), 'captions', f'{args.caption_file}.json')
+    captions_path = os.path.join(args.data_dir, 'captions', str(args.sequence_id), 'captions', f'{args.caption_file}.json') # preprocess_captions.py 에서 생성한 json 파일
 
     with open(captions_path, 'r') as f:
-        out = json.load(f)
+        out = json.load(f) # captions 정보를 내포함
 
 
-    outputs = []
+    outputs = [] 
 
     # Compute start idx
-    all_start_times = np.array([float(x['file_start'][:-4]) for x in out])
+    all_start_times = np.array([float(x['file_start'][:-4]) for x in out]) # list of all start files in pkl
     diff = all_start_times - start_time
-    start_idx = np.argmin(np.abs(diff))
+    start_idx = np.argmin(np.abs(diff)) # find the index with the smallest difference
 
     # Compute end idx
     all_end_times = np.array([float(x['file_end'][:-4]) for x in out])
     diff = all_end_times - end_time
-    end_idx = np.argmin(np.abs(diff))
+    end_idx = np.argmin(np.abs(diff)) # find the index with the smallest difference
 
 
-    pkl_files = glob.glob(os.path.join(args.coda_dir, str(args.sequence_id), '*.pkl'))
-    pkl_files.sort(key=lambda x: float(x.split('/')[-1][:-4]))
+    pkl_files = glob.glob(os.path.join(args.coda_dir, str(args.sequence_id), '*.pkl')) # 현재 sequence의 모든 .pkl 파일 경로를 가져옴
+    pkl_files.sort(key=lambda x: float(x.split('/')[-1][:-4])) # .pkl 파일들을 시간 순서대로 정렬
 
     for i in range(start_idx, end_idx+1):
 
@@ -190,7 +206,7 @@ def load_memory(args, qa_instance, use_milvus=True, use_optimal_context=False, i
             'caption': item['caption'],
         }
 
-        outputs.append(entity)
+        outputs.append(entity) #outputs는 각 프레임 구간의 caption, 위치, 회전(theta), 시간 정보를 정리한 리스트로, 이후 QA 평가나 context 복원 시 그대로 재활용할 수 있는 raw memory 데이터이다.
 
         if type(memory) == VideoMemory:
 
@@ -210,10 +226,9 @@ def load_memory(args, qa_instance, use_milvus=True, use_optimal_context=False, i
 
             entity = ImageMemoryItem.from_dict(entity)
         else:
-            entity = MemoryItem.from_dict(entity)
-
+            entity = MemoryItem.from_dict(entity) # 여기서 entity는 caption 정보들을 담고 있는 dictionary임, dictionary 중에서 내 dataclass(MilivusDB)에 필요한 인자들만 골라와서 저장
         if use_milvus:
-            memory.insert(entity, text_embedding=item['text_embedding'])
+            memory.insert(entity, text_embedding=item['text_embedding']) # MilvusDB에 caption 정보를 삽입
         else:
             memory.insert(entity)
 
@@ -223,21 +238,23 @@ def load_memory(args, qa_instance, use_milvus=True, use_optimal_context=False, i
         memory.insert(qa_instance['context'])
 
 
-    return memory, outputs
+    return memory, outputs # DB에 caption 정보를 넣은 memory 객체와 outputs 리스트 반환
 
 def main(args):
 
     use_milvus = False
     use_optimal_context = False
     if 'remembr' in args.model:
-        base_llm = args.model.split('+')[-1]
-        agent = ReMEmbRAgent(llm_type=base_llm, num_ctx=args.num_ctx, temperature=args.temperature)
-        use_milvus = True
+        print("Using ReMEmbR agent")
+        base_llm = args.model.split('+')[-1] # 여기서 base_llm은 remembr 뒤에 오는 llm의 종류를 뜻함 ex(remembr+llama3 -> llama3)
+        agent = ReMEmbRAgent(llm_type=base_llm, num_ctx=args.num_ctx, temperature=args.temperature) # 여기서 temperature는 LLM의 창의성을 반영함, 값이 낮으면 가장 높은 확률의 단어 선택, 높으면 다양성 증가
+        use_milvus = True # DB로 Milvus 사용 여부
 
     elif 'optimal' in args.model:
         base_llm = args.model.split('+')[-1]
         agent = NonAgent(llm_type=base_llm, num_ctx=args.num_ctx, temperature=args.temperature)
         use_optimal_context = True
+
     elif 'vlm' in args.model:
         agent = VLMNonAgent(llm_type='gpt-4o')
 
@@ -245,15 +262,15 @@ def main(args):
         agent = NonAgent(llm_type=args.model, num_ctx=args.num_ctx*4, temperature=args.temperature)
 
 
-    data_path = os.path.join(args.data_dir, 'questions', str(args.sequence_id), args.qa_file+'.json')
+    data_path = os.path.join(args.data_dir, 'questions', str(args.sequence_id), args.qa_file+'.json') #form_questions_jsons.py 에서 생성한 json 파일
 
     data = json.load(open(data_path, 'r'))
-    data = data['data']
+    data = data['data'] # list of qa instances 불러오기
 
 
     running_successes = 0
     num_binary = 0
-
+    # 세 종류의 Question Type에 대한 누적 오차 및 개수 초기화
     running_pos_error = 0
     num_position = 0
 
@@ -275,7 +292,7 @@ def main(args):
         answers = qa_instance['answers']
         id = qa_instance['id']
 
-        if (qa_instance['type'] == 'text'):
+        if (qa_instance['type'] == 'text'): # text questions는 건너뛰기?? 왜지?
             print("Skipping text questions for now")
             responses.append({}) # this means skipped!
             continue
@@ -321,7 +338,7 @@ def main(args):
         print("Question:", question)
         if 'response' in out_dict:
             print("Response:", out_dict['response'])
-        print("Running Binary QA accuracy", running_successes/(num_binary+1))
+        print("Running Binary QA accuracy", running_successes/(num_binary+1)) # binary QA 정확도 출력
         print("Running Spatial Error", running_pos_error/(num_position+1))
         print("Running Temporal Error", running_time_error/(num_time+1))
         print("Running Duration Error", running_duration_error/(num_duration+1))
@@ -371,7 +388,7 @@ if __name__ == "__main__":
 
     # llm-specific args
     parser.add_argument("--temperature", type=float, default=0.7)
-    parser.add_argument("--num_ctx", type=int, default=8192*8)
+    parser.add_argument("--num_ctx", type=int, default=8192*8) # 검색된 관련 문서들(retrieved documents) 중에서 LLM이 실제로 "얼마나 많이 참고할 것인가"를 정하는 변수다.
 
     # remembr specific args
     parser.add_argument("--window_size", type=int, default=5)

@@ -1,0 +1,83 @@
+services:
+  # 1. nav2 서비스 (기존 docker run 명령어 기반)
+  nav4:
+    image: nav4  # 'docker run'에서 사용한 이미지 이름
+    container_name: nav4
+    
+    # --- 핵심 설정 ---
+    privileged: true      # --privileged
+    network_mode: host  # ★★★ --net=host (가장 중요)
+    ipc: host           # --ipc=host
+    # --- GPU 설정 ---
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+              options:
+                "fail_on_missing": "false"
+    # --- 환경 변수 ---
+    environment:
+      - DISPLAY=${DISPLAY} # --env="DISPLAY" (호스트의 DISPLAY 값을 가져옴)
+      - QT_X11_NO_MITSHM=1 # --env="QT_X11_NO_MITSHM=1"
+      
+    # --- 볼륨 마운트 ---
+    volumes:
+      - /media/bksuh/T72/nav2_bag:/root/ros2_ws/ssd # --volume
+      # GUI 앱(RViz 등) 실행을 위해 X11 소켓 마운트 (추천)
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /home/bksuh/Desktop/ros_bag:/root/ros2_ws/ros_bag_from_host
+      
+    # --- 터미널 설정 ---
+    stdin_open: true  # -i
+    tty: true         # -t
+    
+    # --- 실행 명령어 ---
+    command: bash     # 'bash' 실행
+    
+    # --- 실행 순서 제어 ---
+    # milvusdb 서비스가 'healthy' 상태가 된 후에 nav2를 시작합니다.
+    depends_on:
+      milvusdb:
+        condition: service_started
+
+  # 2. MilvusDB 서비스
+  milvusdb:
+    image: milvusdb/milvus:v2.6.1 # 'docker ps'에서 확인된 이미지
+    container_name: milvus-standalone # 기존 컨테이너 이름과 동일하게 설정
+    security_opt:
+      - seccomp:unconfined  # 보안 옵션 설정 (필요시 조정)
+
+    # --- 포트 노출 ---
+    # nav2가 localhost:19530 으로 접속할 수 있도록 포트를 호스트에 노출
+    ports:
+      - "19530:19530"
+      - "9091:9091"
+      - "2379:2379" # 'docker ps'에서 확인된 포트
+      
+    # --- 데이터 영속성 (강력 권장) ---
+    # 이 파일이 있는 위치에 'volumes/milvus' 디렉토리가 생성되고 데이터가 저장됩니다.
+    volumes:
+      - ./volumes/milvus:/var/lib/milvus
+      - ./embedEtcd.yaml:/milvus/configs/embedEtcd.yaml
+      - ./user.yaml:/milvus/configs/user.yaml
+      
+    # --- Milvus 환경 변수 ---
+    environment:
+          - ETCD_USE_EMBED=true
+          - ETCD_DATA_DIR=/var/lib/milvus/etcd
+          - ETCD_CONFIG_PATH=/milvus/configs/embedEtcd.yaml
+          - COMMON_STORAGETYPE=local
+          - DEPLOY_MODE=STANDALONE
+      
+    healthcheck:
+      test: ["CMD", "curl -f http://localhost:9091/healthz"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+      start_period: 90s
+
+    # ★ 추가: 셸 스크립트와 동일한 실행 명령어
+    command: milvus run standalone

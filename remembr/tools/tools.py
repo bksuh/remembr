@@ -30,13 +30,13 @@ def format_document(docs, ref_time=None):
 def format_docs(docs):
     out_string = ""
     for doc in docs:
-        if len(doc['time']) == 2:
+        if len(doc['time']) == 2: # time can be stored as [start, end]
             t = doc['time'][0]
         else:
             t = doc['time']
 
-        t = localtime(t)
-        t = strftime('%Y-%m-%d %H:%M:%S', t)
+        t = localtime(t) #유닉스 타임스팸프를 시분초 형태로 변형
+        t = strftime('%Y-%m-%d %H:%M:%S', t) # 시분초 형태를 문자열로 변형
 
         s = f"At time={t}, the robot was at an average position of {np.array(doc['position']).round(3).tolist()}. "
         s += f"The robot saw the following: {doc['caption']}\n\n"
