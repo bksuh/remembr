@@ -1,0 +1,75 @@
+FROM ros:humble-ros-base-jammy
+
+# ----------------------------------------------------------------------------
+# Use Kakao mirror (Korea optimization)
+RUN sed -i 's|archive.ubuntu.com|mirror.kakao.com|g' /etc/apt/sources.list && \
+    sed -i 's|security.ubuntu.com|mirror.kakao.com|g' /etc/apt/sources.list
+
+# ----------------------------------------------------------------------------
+# Update & Common Dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    git \
+    gedit \
+    apt-utils \
+    net-tools \
+    python3-pip \
+    python3-setuptools \
+    python3-tf2-ros \
+    python3-numpy \
+    build-essential \
+    cmake \
+    wget \
+    libgflags-dev \
+    libudev-dev \
+    nlohmann-json3-dev \
+    libdw-dev \
+    libpcl-dev \
+    alsa-utils \
+    libusb-1.0.0-dev \
+    libeigen3-dev \
+    ros-humble-ament-cmake \
+    ros-humble-rclpy \
+    ros-humble-rosbag2-storage-mcap \
+    ros-humble-image-transport \
+    ros-humble-std-msgs \
+    ros-humble-image-transport-plugins \
+    ros-humble-compressed-image-transport \
+    ros-humble-image-publisher \
+    ros-humble-camera-info-manager \
+    ros-humble-diagnostic-updater \
+    ros-humble-diagnostic-msgs \
+    ros-humble-statistics-msgs \
+    ros-humble-backward-ros \
+    ros-humble-rviz2 \
+    ros-humble-tf2-ros \
+    ros-humble-tf2-py \
+    ros-humble-pcl-conversions \
+    ros-humble-pcl-msgs \
+    ros-humble-pcl-ros \
+    ros-humble-geometry-msgs \
+    ros-humble-rqt-image-view \
+    ros-humble-builtin-interfaces \
+    ros-humble-visualization-msgs \
+    && rm -rf /var/lib/apt/lists/*
+
+# ----------------------------------------------------------------------------
+# Create workspace and clone sources
+WORKDIR /root/
+
+# Clone remembr
+RUN git clone https://github.com/bksuh/remembr
+RUN /bin/bash -c "cd ./remembr & git pull"
+
+WORKDIR /root/remembr/deps
+RUN git clone --branch LongVILA https://github.com/NVlabs/VILA.git
+
+WORKDIR /root/remembr
+RUN /bin/bash -c "chmod +x ./vila_setup.sh && ./vila_setup.sh remembr"
+RUN /bin/bash -c "python3 -m pip install -r requirements.txt"
+
+# Set up bash environment
+RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc && \
+    echo "source /root/ros2_ws/install/setup.bash" >> /root/.bashrc
+
+CMD ["bash"]
