@@ -59,13 +59,13 @@ WORKDIR /root/
 
 # Clone remembr
 RUN git clone https://github.com/bksuh/remembr
-RUN /bin/bash -c "cd ./remembr & git pull"
 
 WORKDIR /root/remembr/deps
 RUN git clone --branch LongVILA https://github.com/NVlabs/VILA.git
 
 WORKDIR /root/remembr
 RUN /bin/bash -c "chmod +x ./vila_setup.sh && ./vila_setup.sh remembr"
+RUN /bin/bash -c "git pull"
 RUN /bin/bash -c "python3 -m pip install -r requirements.txt"
 
 # Set up bash environment
