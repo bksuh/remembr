@@ -76,7 +76,7 @@ class VILACaptioner(Captioner):
         # Model
         disable_torch_init()
 
-        qs = args.query
+        qs = args.query # <video>\n Please describe what you see in the few seconds of the video.
         image_token_se = DEFAULT_IM_START_TOKEN + DEFAULT_IMAGE_TOKEN + DEFAULT_IM_END_TOKEN
         if IMAGE_PLACEHOLDER in qs:
             if self.model.config.mm_use_im_start_end:

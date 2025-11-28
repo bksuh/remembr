@@ -88,7 +88,7 @@ Question: Can you take me to the green exit sign?
 
 Rules for reasoning:
 1. Keep your reasoning steps concise.
-2. If the user is asking you to take them somwhere, they are asking for a position. If they are asking about if something exists, it is likely a binary yes/no question.
+2. If the user is asking you to take them somewhere, they are asking for a position. If they are asking about if something exists, it is likely a binary yes/no question.
 3. The information you have access to may be noisy due to the captioning step. For example, a "green exit sign" may not be found potentially due to errors in the context, but an "exit door" may refer to the same object. Use this fact to answer when you do not know the answer.
 4. You must provide a best guess answer. You cannot provide a None answer if you selected that category.
 

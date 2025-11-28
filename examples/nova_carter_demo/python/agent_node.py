@@ -62,7 +62,7 @@ class AgentNode(Node):
     def query_callback(self, msg: String):
         
         if not self.query_filter(msg.data):
-            logger.info("Skipping query {msg.data} because it does not have keyword")
+            logger.info(f"Skipping query {msg.data} because it does not have keyword")
             return 
 
         try:
