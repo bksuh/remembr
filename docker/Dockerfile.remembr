@@ -51,6 +51,7 @@ RUN apt-get update && \
     ros-humble-rqt-image-view \
     ros-humble-builtin-interfaces \
     ros-humble-visualization-msgs \
+    terminator \
     && rm -rf /var/lib/apt/lists/*
 
 # ----------------------------------------------------------------------------
