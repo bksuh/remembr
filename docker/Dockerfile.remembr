@@ -67,6 +67,7 @@ WORKDIR /root/remembr
 RUN /bin/bash -c "chmod +x ./vila_setup.sh && ./vila_setup.sh remembr"
 RUN /bin/bash -c "git pull"
 RUN /bin/bash -c "python3 -m pip install -r requirements.txt"
+RUN /bin/bash -c "python3 -m pip install -e ."
 
 # Set up bash environment
 RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc && \

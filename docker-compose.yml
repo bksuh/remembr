@@ -42,8 +42,46 @@ services:
     depends_on:
       milvusdb:
         condition: service_started
-
+  remembr:
+    image: remembr
+    container_name: remembr
+    privileged: true
+    network_mode: host
+    ipc: host
+    
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+              options:
+                "fail_on_missing": "false"
+    # --- 환경 변수 ---
+    environment:
+      - DISPLAY=${DISPLAY} # --env="DISPLAY" (호스트의 DISPLAY 값을 가져옴)
+      - QT_X11_NO_MITSHM=1 # --env="QT_X11_NO_MITSHM=1"
+      
+    # --- 볼륨 마운트 ---
+    volumes:
+      - /media/bksuh/T72/nav2_bag:/root/ros2_ws/ssd # --volume
+      # GUI 앱(RViz 등) 실행을 위해 X11 소켓 마운트 (추천)
+      - /tmp/.X11-unix:/tmp/.X11-unix
   # 2. MilvusDB 서비스
+    # --- 터미널 설정 ---
+    stdin_open: true  # -i
+    tty: true         # -t
+    
+    # --- 실행 명령어 ---
+    command: bash     # 'bash' 실행
+    
+    # --- 실행 순서 제어 ---
+    # milvusdb 서비스가 'healthy' 상태가 된 후에 nav2를 시작합니다.
+    depends_on:
+      milvusdb:
+        condition: service_started
+        
   milvusdb:
     image: milvusdb/milvus:v2.6.1 # 'docker ps'에서 확인된 이미지
     container_name: milvus-standalone # 기존 컨테이너 이름과 동일하게 설정
