@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>NavQA trajectory viewer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; font-family: ui-sans-serif, system-ui, sans-serif; background: #fafafa; color: #222; }
+  #app { display: grid; grid-template-columns: 280px 1fr; height: 100vh; }
+  #sidebar { background: #fff; border-right: 1px solid #ddd; padding: 14px; overflow-y: auto; }
+  #sidebar h1 { font-size: 14px; margin: 0 0 8px; color: #555; letter-spacing: 0.04em; text-transform: uppercase; }
+  #row-picker { width: 100%; font-size: 13px; padding: 4px; }
+  #nav-buttons { display: flex; gap: 6px; margin-top: 6px; }
+  #nav-buttons button { flex: 1; padding: 4px 8px; cursor: pointer; }
+  .toggle-row { display: flex; align-items: center; gap: 6px; margin-top: 12px; font-size: 13px; }
+  #row-list { margin-top: 10px; max-height: 60vh; overflow-y: auto; border: 1px solid #eee; border-radius: 4px; padding: 4px; }
+  .row-item { padding: 4px 6px; font-size: 11px; cursor: pointer; border-radius: 3px; line-height: 1.3; }
+  .row-item:hover { background: #f0f0f0; }
+  .row-item.active { background: #fde6c3; }
+  .badge { display: inline-block; min-width: 22px; text-align: center; padding: 0 4px; border-radius: 3px; font-size: 10px; margin-right: 4px; }
+  .badge.in_window { background: #c8f0c8; color: #2a5e2a; }
+  .badge.snapped { background: #ffe0a0; color: #8a5a00; }
+  .badge.error, .badge.no_window_captions, .badge.missing_navqa { background: #f6c0c0; color: #8a2020; }
+
+  #main { display: grid; grid-template-columns: 3fr 2fr; grid-template-rows: 1fr auto; gap: 10px; padding: 12px; min-width: 0; }
+  #plot-wrap { position: relative; background: #fff; border: 1px solid #ddd; border-radius: 4px; min-height: 0; }
+  #plot { width: 100%; height: 100%; }
+  #cursor-overlay { position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.65); color: #fff; padding: 4px 8px; font-size: 12px; font-family: ui-monospace, monospace; border-radius: 3px; pointer-events: none; z-index: 5; }
+  #cursor-overlay.hidden { display: none; }
+  #frames-grid { background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 6px; overflow-y: auto; display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: min-content; gap: 6px; }
+  .frame-cell { display: flex; flex-direction: column; gap: 2px; }
+  .frame-cell img { width: 100%; height: auto; border: 1px solid #eee; border-radius: 2px; display: block; }
+  .frame-cell .frame-title { font-size: 10px; color: #555; font-family: ui-monospace, monospace; word-break: break-all; }
+  #info-panel { grid-column: 1 / -1; background: #1e1e1e; color: #ddd; padding: 10px 14px; font-family: ui-monospace, monospace; font-size: 12px; border-radius: 4px; white-space: pre-wrap; line-height: 1.45; max-height: 30vh; overflow-y: auto; }
+  #info-panel .k { color: #7ec4ff; }
+  #info-panel .ok { color: #95e08e; }
+  #info-panel .warn { color: #ffd166; }
+  #info-panel .err { color: #ff8585; }
+</style>
+</head>
+<body>
+<div id="app">
+  <aside id="sidebar">
+    <h1>Row</h1>
+    <select id="row-picker"></select>
+    <div id="nav-buttons">
+      <button id="prev">← Prev</button>
+      <button id="next">Next →</button>
+    </div>
+    <label class="toggle-row">
+      <input type="checkbox" id="cursor-toggle" checked />
+      Show cursor (x, y)
+    </label>
+    <label class="toggle-row">
+      <input type="checkbox" id="fov-toggle" checked />
+      Show per-frame FOV wedges
+    </label>
+    <h1 style="margin-top:14px">All rows</h1>
+    <div id="row-list"></div>
+  </aside>
+  <section id="main">
+    <div id="plot-wrap">
+      <div id="cursor-overlay">x, y = —</div>
+      <div id="plot"></div>
+    </div>
+    <div id="frames-grid"></div>
+    <pre id="info-panel">Loading…</pre>
+  </section>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
