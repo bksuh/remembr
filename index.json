@@ -1,0 +1,471 @@
+[
+  {
+    "idx": 0,
+    "seq_id": 0,
+    "uuid": "LONG_115fe136-a8ee-43f7-858d-a0a357c03fad",
+    "question": "Where is the closest place to sit?",
+    "status": "in_window"
+  },
+  {
+    "idx": 1,
+    "seq_id": 0,
+    "uuid": "LONG_7213d1b5-0f7a-4361-b779-c6689042ae8a",
+    "question": "Where is the yellow police call pole?",
+    "status": "in_window"
+  },
+  {
+    "idx": 2,
+    "seq_id": 0,
+    "uuid": "LONG_74167a94-2255-4d16-bb78-db37801acc0a",
+    "question": "Where is the statue in front of the Bill and Melinda Gates Computer Science building?",
+    "status": "in_window"
+  },
+  {
+    "idx": 3,
+    "seq_id": 0,
+    "uuid": "LONG_f4661173-26c9-4939-824c-a238736d53ef",
+    "question": "Where is the nearest recycling bin?",
+    "status": "in_window"
+  },
+  {
+    "idx": 4,
+    "seq_id": 0,
+    "uuid": "LONG_242c13b6-b47f-4022-9697-02611d770526",
+    "question": "Where did you see the sculpture with the hanging boats?",
+    "status": "in_window"
+  },
+  {
+    "idx": 5,
+    "seq_id": 0,
+    "uuid": "LONG_38a496dc-1afd-4e26-b8b2-c6640cab0499",
+    "question": "Where are the closest elevators?",
+    "status": "in_window"
+  },
+  {
+    "idx": 6,
+    "seq_id": 0,
+    "uuid": "MEDIUM_c6c87c47-04c3-44ca-a1be-053153b740c5",
+    "question": "Where is the nearest bike rack that is not empty?",
+    "status": "in_window"
+  },
+  {
+    "idx": 7,
+    "seq_id": 0,
+    "uuid": "SHORT_f20ba66d-74e4-4e2e-9a91-ac2576f16e0a",
+    "question": "Where did you last see a red fire hydrant?",
+    "status": "in_window"
+  },
+  {
+    "idx": 8,
+    "seq_id": 16,
+    "uuid": "16_LONG_d9c7a3a4-fb29-4c2b-9f30-3638e96ec957",
+    "question": "Where is the closest trash can?",
+    "status": "in_window"
+  },
+  {
+    "idx": 9,
+    "seq_id": 16,
+    "uuid": "16_LONG_0cf9d4c5-ba79-4e27-b4dd-a033b2bc87c6",
+    "question": "Can you take me to the large and busy intersection?",
+    "status": "in_window"
+  },
+  {
+    "idx": 10,
+    "seq_id": 16,
+    "uuid": "16_LONG_2f2264bc-f045-4cf0-960e-17ef961b61e3",
+    "question": "Where did you see that red semi-truck?",
+    "status": "in_window"
+  },
+  {
+    "idx": 11,
+    "seq_id": 16,
+    "uuid": "16_LONG_dbfc9ff7-cb76-4a6b-975f-e0ed40b1bd3f",
+    "question": "Where can I find a place to sit across the flights of stairs I last saw?",
+    "status": "in_window"
+  },
+  {
+    "idx": 12,
+    "seq_id": 16,
+    "uuid": "16_LONG_2af098fa-6c27-4eb9-91a7-87e1bb14895a",
+    "question": "Can you take me to the bank?",
+    "status": "in_window"
+  },
+  {
+    "idx": 13,
+    "seq_id": 16,
+    "uuid": "16_MEDIUM_1aa16770-2f02-4260-9e8f-9835e55c4fc8",
+    "question": "Can you take me to where the cones were blocking parking?",
+    "status": "in_window"
+  },
+  {
+    "idx": 14,
+    "seq_id": 16,
+    "uuid": "16_MEDIUM_b44f6dae-918f-4210-8850-c294ec3ffef4",
+    "question": "Can you take me to the intersection the golf cart stopped at?",
+    "status": "in_window"
+  },
+  {
+    "idx": 15,
+    "seq_id": 16,
+    "uuid": "16_MEDIUM_78f0b5ee-364e-4ea3-82e3-9708f9e96c24",
+    "question": "Where is the metal boat sculpture?",
+    "status": "in_window"
+  },
+  {
+    "idx": 16,
+    "seq_id": 16,
+    "uuid": "16_SHORT_2ffa5ee7-3510-4943-b0f3-86387cb7a35f",
+    "question": "Where did you see the yellow police pole?",
+    "status": "in_window"
+  },
+  {
+    "idx": 17,
+    "seq_id": 16,
+    "uuid": "16_SHORT_c839b6c6-8680-4ebe-be48-808734edecf3",
+    "question": "Where is the intersection you crossed last?",
+    "status": "in_window"
+  },
+  {
+    "idx": 18,
+    "seq_id": 16,
+    "uuid": "16_SHORT_9c3b30a1-07df-463f-aac0-e2723b9495e1",
+    "question": "Where is the nearest recycling bin?",
+    "status": "in_window"
+  },
+  {
+    "idx": 19,
+    "seq_id": 16,
+    "uuid": "16_SHORT_4096b839-974b-457f-9fdf-e0158f29f60a",
+    "question": "Where did you see the rainbow flag?",
+    "status": "in_window"
+  },
+  {
+    "idx": 20,
+    "seq_id": 21,
+    "uuid": "21_LONG_bf58d6a5-cfa1-41fa-a1db-881134770eec",
+    "question": "Can you take me to the bike rack closest to the nearby yellow police pole?",
+    "status": "in_window"
+  },
+  {
+    "idx": 21,
+    "seq_id": 21,
+    "uuid": "21_LONG_af512a63-3353-48eb-90cb-21b97b1dff92",
+    "question": "Where are the closest newspaper stands near a crosswalk?",
+    "status": "in_window"
+  },
+  {
+    "idx": 22,
+    "seq_id": 21,
+    "uuid": "21_LONG_c14eb6b3-e13e-4204-abf5-1f8bd8cae969",
+    "question": "Where is the nearest yellow police pole?",
+    "status": "in_window"
+  },
+  {
+    "idx": 23,
+    "seq_id": 21,
+    "uuid": "21_LONG_c92484a7-c88a-4bdf-903c-83b7c27df536",
+    "question": "Can you take me to a bike rack closest to the Texas crosswalk entrance?",
+    "status": "in_window"
+  },
+  {
+    "idx": 24,
+    "seq_id": 21,
+    "uuid": "21_MEDIUM_f4f9e877-351e-4721-b43c-f7348acf027a",
+    "question": "Can you take me to the parking lot?",
+    "status": "in_window"
+  },
+  {
+    "idx": 25,
+    "seq_id": 21,
+    "uuid": "21_MEDIUM_b269f9d2-9984-453d-843e-90ec991a0436",
+    "question": "Can you take me to the nearest yellow police pole?",
+    "status": "in_window"
+  },
+  {
+    "idx": 26,
+    "seq_id": 21,
+    "uuid": "21_MEDIUM_eb7adb12-db6c-49c4-930c-b667f76633fb",
+    "question": "Can you take me to the closest bike rack near trash cans?",
+    "status": "in_window"
+  },
+  {
+    "idx": 27,
+    "seq_id": 21,
+    "uuid": "21_MEDIUM_75bb8e35-542b-4c39-9021-26d234d2b796",
+    "question": "Can you find me somewhere to sit near the stairs?",
+    "status": "in_window"
+  },
+  {
+    "idx": 28,
+    "seq_id": 21,
+    "uuid": "21_SHORT_717f5d70-12e2-423a-a8aa-b64b5428150c",
+    "question": "Can you take me to the nearest bike rack?",
+    "status": "in_window"
+  },
+  {
+    "idx": 29,
+    "seq_id": 21,
+    "uuid": "21_SHORT_d6c287f2-6320-409f-a42e-02d48358eaed",
+    "question": "Where was the golf cart?",
+    "status": "in_window"
+  },
+  {
+    "idx": 30,
+    "seq_id": 21,
+    "uuid": "21_SHORT_bea0442d-3c89-4d30-91e9-d5174901ed80",
+    "question": "Can you take me to the nearest scooter?",
+    "status": "in_window"
+  },
+  {
+    "idx": 31,
+    "seq_id": 22,
+    "uuid": "22_LONG_3a94843e-7200-49b0-84f4-aea31fdbc2f5",
+    "question": "Can you take me to the elevator?",
+    "status": "in_window"
+  },
+  {
+    "idx": 32,
+    "seq_id": 22,
+    "uuid": "22_LONG_e9e5feba-7cdc-4dda-8d21-d274f7a0c305",
+    "question": "Can you take me to the food court?",
+    "status": "in_window"
+  },
+  {
+    "idx": 33,
+    "seq_id": 22,
+    "uuid": "22_LONG_9113f3ce-b0e2-47f2-8926-4286ed7b7238",
+    "question": "Where can I get some coffee?",
+    "status": "in_window"
+  },
+  {
+    "idx": 34,
+    "seq_id": 22,
+    "uuid": "22_LONG_e4d51dc6-99a4-4f8b-86e6-9abba6863c4e",
+    "question": "Where is the closest place to grab a bite of food?",
+    "status": "in_window"
+  },
+  {
+    "idx": 35,
+    "seq_id": 22,
+    "uuid": "22_MEDIUM_d7a8c19b-9574-42f3-a220-f4c4853a71bb",
+    "question": "Can you take me to a trash can near an exit?",
+    "status": "in_window"
+  },
+  {
+    "idx": 36,
+    "seq_id": 22,
+    "uuid": "22_SHORT_f65fba8e-2be7-49fa-ae05-0b6366e35260",
+    "question": "Where is the closest fire hydrant?",
+    "status": "in_window"
+  },
+  {
+    "idx": 37,
+    "seq_id": 22,
+    "uuid": "22_SHORT_5a44f153-1031-4bbc-b79d-b05de3919cd6",
+    "question": "Can you take me to the closest entrance into the building?",
+    "status": "in_window"
+  },
+  {
+    "idx": 38,
+    "seq_id": 22,
+    "uuid": "22_SHORT_0593cee9-9e74-4daf-bb65-0f32474caa00",
+    "question": "Can you take me to the nearest trash can?",
+    "status": "in_window"
+  },
+  {
+    "idx": 39,
+    "seq_id": 3,
+    "uuid": "3_LONG_3a877fd4-beaf-4f2f-b1dc-9d461707dd2d",
+    "question": "Where did I see a horse sculpture?",
+    "status": "snapped"
+  },
+  {
+    "idx": 40,
+    "seq_id": 3,
+    "uuid": "3_LONG_73204feb-ee1c-4567-a836-fe2db05bfb23",
+    "question": "Where did I see over 5 tables with people chatting there?",
+    "status": "in_window"
+  },
+  {
+    "idx": 41,
+    "seq_id": 3,
+    "uuid": "3_MEDIUM_bdb7c7ea-7e73-4565-9198-e10dfe218646",
+    "question": "Where did you see the stairs in the building?",
+    "status": "snapped"
+  },
+  {
+    "idx": 42,
+    "seq_id": 3,
+    "uuid": "3_MEDIUM_2d60058c-1488-43dd-847c-d40bc1e2859f",
+    "question": "Where did you last see a big wall art?",
+    "status": "snapped"
+  },
+  {
+    "idx": 43,
+    "seq_id": 3,
+    "uuid": "3_MEDIUM_2d2b8344-6797-4a57-91c3-2efd1c43f517",
+    "question": "Where did you last leave the building?",
+    "status": "in_window"
+  },
+  {
+    "idx": 44,
+    "seq_id": 3,
+    "uuid": "3_SHORT_81b4e8bd-348a-4326-a3df-b84a4a422b0e",
+    "question": "Where did you see a parked van?",
+    "status": "in_window"
+  },
+  {
+    "idx": 45,
+    "seq_id": 3,
+    "uuid": "3_SHORT_8aa1186d-ad47-4a1d-8068-73efdc21d309",
+    "question": "Where did you see the yellow bollards?",
+    "status": "in_window"
+  },
+  {
+    "idx": 46,
+    "seq_id": 3,
+    "uuid": "3_SHORT_55634471-144f-4470-8354-82f0f2c69842",
+    "question": "Where did you see a blue truck?",
+    "status": "in_window"
+  },
+  {
+    "idx": 47,
+    "seq_id": 3,
+    "uuid": "3_SHORT_50661793-596b-4c1f-b07e-f312bbbaf3db",
+    "question": "Where did you see a motocycle?",
+    "status": "in_window"
+  },
+  {
+    "idx": 48,
+    "seq_id": 3,
+    "uuid": "3_SHORT_2dbd306e-1a72-4c69-9a02-e88f13fe33a8",
+    "question": "Where did you see an emergency phone call location?",
+    "status": "in_window"
+  },
+  {
+    "idx": 49,
+    "seq_id": 4,
+    "uuid": "4_LONG_af289cc9-dbcc-451c-89fb-9192a8e6aecb",
+    "question": "where can I find the horse sculpture?",
+    "status": "in_window"
+  },
+  {
+    "idx": 50,
+    "seq_id": 4,
+    "uuid": "4_LONG_01711b96-6884-44a7-8883-0f73b1b4a3bd",
+    "question": "Can you take me to the second floor inside the building?",
+    "status": "in_window"
+  },
+  {
+    "idx": 51,
+    "seq_id": 4,
+    "uuid": "4_LONG_34badd30-a686-4f85-8f87-0c82e97a2c51",
+    "question": "Can you go back to the position where you made the first turn",
+    "status": "in_window"
+  },
+  {
+    "idx": 52,
+    "seq_id": 4,
+    "uuid": "4_LONG_d0815d48-8e28-417e-90f0-997e708e73b4",
+    "question": "Where I can call the police?",
+    "status": "in_window"
+  },
+  {
+    "idx": 53,
+    "seq_id": 4,
+    "uuid": "4_LONG_b66cb337-b0a3-4030-b992-b60437a35fcd",
+    "question": "Where I can find a picture of a human?",
+    "status": "in_window"
+  },
+  {
+    "idx": 54,
+    "seq_id": 4,
+    "uuid": "4_LONG_3b1c06b9-e6da-4f72-abaf-fd56b8668712",
+    "question": "Where is the closest bin to throw away a recyclable box in the building?",
+    "status": "in_window"
+  },
+  {
+    "idx": 55,
+    "seq_id": 4,
+    "uuid": "4_MEDIUM_56b27d99-f436-461d-bc4e-aa33bc72672d",
+    "question": "Can you take me to the Monochrome for Austin sculpture?",
+    "status": "in_window"
+  },
+  {
+    "idx": 56,
+    "seq_id": 4,
+    "uuid": "4_MEDIUM_c5fd604e-e482-49d8-bbbd-1ee6ab360c95",
+    "question": "Can you take me to the door where you entered the building?",
+    "status": "in_window"
+  },
+  {
+    "idx": 57,
+    "seq_id": 4,
+    "uuid": "4_MEDIUM_b2bdb736-4961-4672-8b74-9fc0e9d4be17",
+    "question": "Can you take me to the door where you left the building?",
+    "status": "in_window"
+  },
+  {
+    "idx": 58,
+    "seq_id": 4,
+    "uuid": "4_SHORT_519b3d63-d1f0-49a5-9c6f-914e6ca4359d",
+    "question": "Where are the stairs?",
+    "status": "in_window"
+  },
+  {
+    "idx": 59,
+    "seq_id": 6,
+    "uuid": "6_LONG_d0e0a27c-67f0-4186-b330-9148db321d15",
+    "question": "Where is the nearest place to get food?",
+    "status": "in_window"
+  },
+  {
+    "idx": 60,
+    "seq_id": 6,
+    "uuid": "6_LONG_1dfb386f-cd34-43e4-ad57-cd4d0b70bcc2",
+    "question": "Where is an ATM?",
+    "status": "in_window"
+  },
+  {
+    "idx": 61,
+    "seq_id": 6,
+    "uuid": "6_LONG_9acacace-2350-4ad0-8eb1-7182a39cf6e8",
+    "question": "Where is the closest place to eat outside?",
+    "status": "in_window"
+  },
+  {
+    "idx": 62,
+    "seq_id": 6,
+    "uuid": "6_LONG_628ccb31-49df-457d-b43a-c247d3a9b82f",
+    "question": "Where is the nearest AED?",
+    "status": "in_window"
+  },
+  {
+    "idx": 63,
+    "seq_id": 6,
+    "uuid": "6_LONG_fc569d7c-6544-4dc1-9591-baee636e5cb2",
+    "question": "Where did you see a crowd of people standing?",
+    "status": "snapped"
+  },
+  {
+    "idx": 64,
+    "seq_id": 6,
+    "uuid": "6_MEDIUM_4701bd3d-352e-40d4-94fe-3d2a18edbd23",
+    "question": "Can you take me to the restroom near the food court?",
+    "status": "in_window"
+  },
+  {
+    "idx": 65,
+    "seq_id": 6,
+    "uuid": "6_MEDIUM_abc888ec-e5a1-4ba9-8612-cc4fec8549f2",
+    "question": "Where did you see orange cones?",
+    "status": "in_window"
+  },
+  {
+    "idx": 66,
+    "seq_id": 6,
+    "uuid": "6_SHORT_2732dae9-2d64-4bc1-b36e-1adf39854dc3",
+    "question": "Where is the nearest fire extinguisher?",
+    "status": "snapped"
+  }
+]
