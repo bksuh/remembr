@@ -308,6 +308,14 @@ function renderFrames(meta) {
 
 // ------- info panel -------
 
+function fmtDuration(s) {
+  if (s == null || !isFinite(s)) return '—';
+  if (s < 60) return `${s.toFixed(1)}s`;
+  const m = Math.floor(s / 60);
+  const r = s - m * 60;
+  return `${m}m ${r.toFixed(0)}s`;
+}
+
 function renderInfo(meta) {
   const lines = [];
   const c = (cls, text) => `<span class="${cls}">${text}</span>`;
@@ -315,6 +323,11 @@ function renderInfo(meta) {
   lines.push(`${c('k', 'UUID:')} ${meta.uuid}`);
   lines.push(`${c('k', 'CSV HMS:')} ${meta.csv_hms}  →  gt_epoch=${meta.gt_epoch.toFixed(0)} (${meta.gt_iso})`);
   lines.push(`${c('k', 'Window UTC:')} ${meta.window_iso[0]}  →  ${meta.window_iso[1]}`);
+  const nSamples = (meta.in_window_xy || []).length;
+  const pathStr = nSamples >= 2
+    ? `${meta.path_length_m.toFixed(1)} m (${nSamples} samples)`
+    : `— (no samples)`;
+  lines.push(`${c('k', 'Window:')} ${fmtDuration(meta.duration_s)}   |   ${c('k', 'Path in window:')} ${pathStr}`);
   if (meta.status === 'in_window') {
     lines.push(`${c('ok', 'RESULT: in-window')}  caption_idx=${meta.caption_idx}  caption_t=${meta.caption_time.toFixed(0)}`);
   } else if (meta.status === 'snapped') {
