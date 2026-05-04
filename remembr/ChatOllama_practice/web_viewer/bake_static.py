@@ -115,6 +115,18 @@ def bake_row(idx, row, out_dir, quality, max_side, recording_tz):
 
     status = "in_window" if in_window else "snapped"
 
+    in_window_xy = [
+        [float(e["position"][0]), float(e["position"][1])]
+        for e in entries
+        if sequence["start_time"] <= e["time"] <= sequence["end_time"]
+    ]
+    if len(in_window_xy) >= 2:
+        pts = np.asarray(in_window_xy)
+        path_length_m = float(np.sum(np.linalg.norm(np.diff(pts, axis=0), axis=1)))
+    else:
+        path_length_m = 0.0
+    duration_s = float(sequence["end_time"] - sequence["start_time"])
+
     meta = {
         "idx": idx,
         "seq_id": seq_id,
@@ -128,6 +140,7 @@ def bake_row(idx, row, out_dir, quality, max_side, recording_tz):
             datetime.fromtimestamp(sequence["start_time"], tz=timezone.utc).isoformat(),
             datetime.fromtimestamp(sequence["end_time"], tz=timezone.utc).isoformat(),
         ],
+        "duration_s": duration_s,
         "in_window": bool(in_window),
         "status": status,
         "snap_offset_seconds": float(gt_epoch - sequence["start_time"]) if not in_window else 0.0,
@@ -135,11 +148,8 @@ def bake_row(idx, row, out_dir, quality, max_side, recording_tz):
         "caption_time": float(cap["time"]),
         "caption_position_xy": [float(cap["position"][0]), float(cap["position"][1])],
         "trajectory_xy": [[float(e["position"][0]), float(e["position"][1])] for e in entries],
-        "in_window_xy": [
-            [float(e["position"][0]), float(e["position"][1])]
-            for e in entries
-            if sequence["start_time"] <= e["time"] <= sequence["end_time"]
-        ],
+        "in_window_xy": in_window_xy,
+        "path_length_m": path_length_m,
         "gt_caption": {
             "x": float(cap["position"][0]),
             "y": float(cap["position"][1]),
